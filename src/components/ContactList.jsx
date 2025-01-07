@@ -9,8 +9,6 @@ const ContactList = () => {
   const filter = useSelector((state) => state.filters.name); 
   const dispatch = useDispatch(); 
 
-  console.log(contacts); 
-
   const filteredContacts = contacts.filter((contact) =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
@@ -23,13 +21,16 @@ const ContactList = () => {
     <ul className={styles.contactList}>
       {filteredContacts.map((contact) => (
         <Contact
-          key={contact.id}
-          id={contact.id}      
-          name={contact.name}  
-          number={contact.number}
-          onDelete={handleDelete} 
-          className={styles.contactItem} 
-        />
+        
+  key={`${contact.id}-${contact.number}-${contact.createdAt}`} 
+  id={contact.id}      
+  name={contact.name}  
+  number={contact.number}
+  onDelete={handleDelete} 
+  className={styles.contactItem} 
+/>
+
+        
       ))}
     </ul>
   );
